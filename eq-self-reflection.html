@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EQ Self-Reflection (1–5 Rating)</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html,
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    form {
+      display: grid;
+      gap: 10px
+    }
+
+    h1 {
+      margin: .25rem 0 .5rem;
+      font-size: 1.5rem
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #1e3a8a;
+      border-radius: 999px;
+      padding: 6px 5px;
+      font-size: .7rem
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: .25rem 0 1rem;
+      justify-content: center;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-size: .98rem
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+      padding: 20px;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 2rem;
+    }
+
+    .question-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+    }
+
+    .question-text {
+      flex: 1;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #374151;
+      word-wrap: break-word;
+      /* Ensures long questions wrap */
+      overflow-wrap: break-word;
+    }
+
+    .scale-options {
+      display: flex;
+      gap: 0.2rem;
+      flex-shrink: 0;
+      /* Prevents the scale from shrinking */
+    }
+
+    .scale-options label {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #d1d5db;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .scale-options input[type="radio"]:checked+label {
+      background-color: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    .scale-options input[type="radio"]:hover+label {
+      background-color: #eff6ff;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: white;
+      background-color: #10b981;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 2rem;
+    }
+
+    .submit-btn:hover {
+      background-color: #059669;
+    }
+
+    button {
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: 600;
+      border: 2px solid;
+      background: gray;
+    }
+
+    button.ghost {
+      background: #fff;
+      color: var(--muted);
+      border-style: dashed
+    }
+
+    .error {
+      display: none;
+      margin-top: 6px;
+      color: var(--bad);
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      padding: 8px 12px
+    }
+
+    .results {
+      margin-top: 14px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      display: grid;
+      gap: 8px
+    }
+
+    .results ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    .kpi {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .badge {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    @media (max-width:640px) {
+      .opt label {
+        font-size: .92rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card" role="form" aria-labelledby="title">
+      <div class="legend" aria-hidden="true">
+        <span class="pill">1 = Strongly Disagree</span>
+        <span class="pill">2 = Disagree</span>
+        <span class="pill">3 = Neutral </span>
+        <span class="pill">4 = Agree</span>
+        <span class="pill">5 = Strongly Agree</span>
+      </div>
+
+      <form id="form" novalidate>
+        <!-- Questions are injected by JS for consistency -->
+      </form>
+
+      <div id="error" class="error" role="alert">Please select a rating (1–5) for every statement.</div>
+
+      <br />
+      <div class="actions">
+        <button type="button" id="calc">Calculate</button>
+        <button type="button" id="reset">Reset</button>
+        <button type="button" id="download" class="ghost" title="Download your responses as CSV">Download CSV</button>
+        <button type="button" id="print" class="ghost" title="Print or save as PDF">Print</button>
+      </div>
+
+      <div class="results" aria-live="polite" aria-atomic="true">
+        <div class="kpi">
+          <span id="total" class="badge">Total: — / 45</span>
+          <span id="avg" class="badge">Average: —</span>
+        </div>
+        <br />
+        <div class="muted" style="font-size: small;">
+          <div><strong>Guide:</strong></div>
+          <ul>
+            <li><strong>9–21</strong> Developing awareness — focus on noticing and naming emotions.</li>
+            <li><strong>22–36</strong> Emerging skill — strengthen regulation and context-appropriate expression.</li>
+            <li><strong>37–45</strong> Strong foundations — refine nuance; consider mentoring others.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- Data ---------- */
+    const QUESTIONS = [
+      "I am able to accurately recognize the physiological signs indicating how I'm feeling.",
+      "I am aware of the causes and reasons behind my emotions and how they influence me.",
+      "I recognize when my emotion is appropriate or inappropriate for particular circumstances.",
+      "I notice and understand different emotions within me that occur at the same time.",
+      "I know what will trigger an emotional reaction in me and why.",
+      "I can accurately label the nuanced emotions I experience.",
+      "I am skilled at expressing my emotions appropriately based on the context, setting, and people around me.",
+      "I am aware of my non-verbal expression of emotions and the message it sends.",
+      "I can effectively manage and regulate my emotions."
+    ];
+    const SCALE = [
+      { val: 1, label: "1" },
+      { val: 2, label: "2" },
+      { val: 3, label: "3" },
+      { val: 4, label: "4" },
+      { val: 5, label: "5" }
+    ];
+
+    /* ---------- DOM helpers ---------- */
+    const $ = sel => document.querySelector(sel);
+    const form = $("#form");
+    const errorBox = $("#error");
+    const totalEl = $("#total");
+    const avgEl = $("#avg");
+    const hintEl = $("#hint");
+
+    /* ---------- Build form ---------- */
+    function buildForm() {
+
+      QUESTIONS.forEach((q, idx) => {
+        // Create the fieldset for the question and scale
+        const fs = document.createElement("fieldset");
+        fs.setAttribute("aria-describedby", `q${idx + 1}-desc`);
+
+        // Create the question text element
+        const questionText = document.createElement("legend");
+        questionText.className = "question-text";
+        questionText.textContent = `${idx + 1}) ${q}`;
+
+        // Create the main row container using flexbox
+        const questionRow = document.createElement("div");
+        questionRow.className = "question-row";
+
+        // Create the container for the scale options
+        const scaleOptions = document.createElement("div");
+        scaleOptions.className = "scale-options";
+
+        // Loop through the scale to create the radio buttons
+        SCALE.forEach(s => {
+          const wrap = document.createElement("div");
+
+          const id = `q${idx + 1}_${s.val}`;
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `q${idx + 1}`;
+          input.id = id;
+          input.value = String(s.val);
+          input.required = true;
+
+          const label = document.createElement("label");
+          label.setAttribute("for", id);
+          label.textContent = s.label;
+
+          wrap.appendChild(input);
+          wrap.appendChild(label);
+          scaleOptions.appendChild(wrap);
+        });
+
+        // Append the question text and scale options to the main row
+        questionRow.appendChild(questionText);
+        questionRow.appendChild(scaleOptions);
+
+        // Append the row to the fieldset and the fieldset to the form
+        fs.appendChild(questionRow);
+        form.appendChild(fs);
+      });
+
+    }
+
+
+    buildForm();
+
+    /* ---------- Logic ---------- */
+    function getValues() {
+      const vals = [];
+      for (let i = 1; i <= QUESTIONS.length; i++) {
+        const sel = form.querySelector(`input[name="q${i}"]:checked`);
+        vals.push(sel ? Number(sel.value) : null);
+      }
+      return vals;
+    }
+    function allAnswered(vals) { return vals.every(v => v !== null); }
+
+    /* ---------- Events ---------- */
+    $("#calc").addEventListener("click", () => {
+      const vals = getValues();
+      if (!allAnswered(vals)) {
+        errorBox.style.display = "block";
+        totalEl.textContent = "Total: — / 45";
+        avgEl.textContent = "Average: —";
+        hintEl.textContent = "Please rate every statement to calculate your score.";
+        return;
+      }
+      errorBox.style.display = "none";
+      const total = vals.reduce((a, b) => a + b, 0);
+      const avg = (total / vals.length).toFixed(2);
+      totalEl.textContent = `Total: ${total} / 45`;
+      avgEl.textContent = `Average: ${avg}`;
+      try { localStorage.setItem("eq_ratings", JSON.stringify(vals)); } catch (e) { }
+    });
+
+    $("#reset").addEventListener("click", () => {
+      form.reset();
+      errorBox.style.display = "none";
+      totalEl.textContent = "Total: — / 45";
+      avgEl.textContent = "Average: —";
+      hintEl.textContent = "Select ratings and click Calculate to view your results.";
+      try { localStorage.removeItem("eq_ratings"); } catch (e) { }
+    });
+
+    $("#download").addEventListener("click", () => {
+      const vals = getValues();
+      if (!allAnswered(vals)) { errorBox.style.display = "block"; return; }
+      const total = vals.reduce((a, b) => a + b, 0);
+      const avg = (total / vals.length).toFixed(2);
+      const rows = [
+        ["Question", "Response (1–5)"],
+        ...QUESTIONS.map((q, i) => [`${i + 1}. ${q}`, vals[i]]),
+        ["Total", total],
+        ["Average", avg]
+      ];
+      const csv = rows.map(r => r.map(x => `"${String(x).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "eq-self-rating.csv"; document.body.appendChild(a);
+      a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    $("#print").addEventListener("click", () => window.print());
+
+    /* ---------- Restore from localStorage ---------- */
+    (function restore() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("eq_ratings") || "null");
+        if (Array.isArray(saved) && saved.length === QUESTIONS.length) {
+          saved.forEach((v, i) => {
+            const input = form.querySelector(`input[name="q${i + 1}"][value="${v}"]`);
+            if (input) input.checked = true;
+          });
+        }
+      } catch (e) { }
+    })();
+  </script>
+</body>
+
+</html>
