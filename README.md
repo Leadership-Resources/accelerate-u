@@ -6,6 +6,7 @@
 * Each html file in the repo will be rendered by Github pages when you add the filename to the live path above.
     * https://leadership-resources.github.io/accelerate-u/eq-self-reflection.html
     * https://leadership-resources.github.io/accelerate-u/eq-understanding-others.html
+    * https://leadership-resources.github.io/accelerate-u/leadership-self-reflection.html
 
 * The html url can then be embedded in an iFrame like this:
 
