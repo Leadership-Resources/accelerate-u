@@ -7,11 +7,11 @@
     * https://leadership-resources.github.io/accelerate-u/eq-self-reflection.html
     * https://leadership-resources.github.io/accelerate-u/eq-understanding-others.html
     * https://leadership-resources.github.io/accelerate-u/leadership-self-reflection.html
+    * https://leadership-resources.github.io/accelerate-u/leadership-self-competency.html
 
 * The html url can then be embedded in an iFrame like this:
 
 ```
-
 <iframe 
     src="https://leadership-resources.github.io/accelerate-u/eq-self-reflection.html" 
     width="100%" 
@@ -20,5 +20,3 @@
 </iframe>
 
 ```
-
-

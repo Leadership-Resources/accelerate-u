@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EQ Self‑Reflection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --brand-green-light: #90CA6F;
+      --brand-green-dark: #64B361;
+      --brand-navy: #313C4C;
+      --brand-gray: #D1D3D4;
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --text: var(--brand-navy);
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bad: #b91c1c;
+      --radius: 16px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      font-family: 'Montserrat', 'Georgia', serif;
+      background-color: var(--bg);
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: auto;
+      padding: 0 16px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+      padding: 28px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: var(--brand-green-light);
+      color: var(--brand-navy);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: .75rem;
+      font-weight: 600;
+      font-family: 'Montserrat';
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .question-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .question-text {
+      flex: 1;
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+      color: var(--brand-navy);
+    }
+
+    .q-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    .q-copy {
+      font-family: 'Georgia', serif;
+      font-weight: 400;
+    }
+
+    .scale-options {
+      display: flex;
+      gap: .4rem;
+      flex-shrink: 0;
+    }
+
+    .scale-options input[type="radio"] {
+      display: none;
+    }
+
+    .scale-options label {
+      width: 1.9rem;
+      height: 1.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #d1d5db;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all .15s ease;
+      font-family: 'Montserrat';
+    }
+
+    .scale-options input[type="radio"]:checked+label {
+      background-color: var(--brand-green-dark);
+      color: #fff;
+      border-color: var(--brand-green-dark);
+      box-shadow: 0 2px 6px rgba(100, 179, 97, .35);
+    }
+
+    .scale-options input[type="radio"]:focus+label {
+      outline: 3px solid var(--brand-green-light);
+      outline-offset: 2px;
+    }
+
+    .scale-options input[type="radio"]:not(:checked)+label:hover {
+      background-color: var(--brand-green-light);
+      color: #fff;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      line-height: 1.2;
+      padding: 0.95rem 1.35rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-family: 'Montserrat';
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .1s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+      letter-spacing: .2px;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    #calc.btn {
+      background: var(--brand-navy);
+      color: #fff;
+    }
+
+    #calc.btn:hover {
+      background: #1d2633;
+    }
+
+    #reset.btn {
+      background: var(--brand-green-dark);
+      color: #fff;
+    }
+
+    #reset.btn:hover {
+      background: #4a9a4a;
+    }
+
+    .ghost.btn {
+      background: #fff;
+      color: var(--brand-navy);
+      border: 2px solid var(--border);
+    }
+
+    .ghost.btn:hover {
+      border-color: var(--brand-navy);
+    }
+
+    .results {
+      margin-top: 28px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .kpi {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-family: 'Montserrat';
+    }
+
+    .muted {
+      color: var(--muted);
+      font-family: 'Georgia';
+    }
+
+    .error {
+      display: none;
+      margin-top: 6px;
+      color: var(--bad);
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-family: 'Georgia';
+    }
+
+    @media (max-width: 640px) {
+      .scale-options label {
+        width: 1.7rem;
+        height: 1.7rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Georgia&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card" role="form" aria-labelledby="title">
+      <div class="legend" aria-hidden="true">
+        <span class="pill">1 = I have little to no competency</span>
+        <span class="pill">2 = I have a bit of competency</span>
+        <span class="pill">3 = I am fairly competent</span>
+        <span class="pill">4 = I am extremely competent</span>
+      </div>
+
+      <form id="form" novalidate></form>
+
+      <div id="error" class="error" role="alert">Please select a rating (1–4) for every statement.</div>
+
+      <div class="actions">
+        <button type="button" id="reset" class="btn">Reset</button>
+        <button type="button" id="download" class="btn ghost">Download CSV</button>
+        <button type="button" id="print" class="btn ghost">Print</button>
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      "Your technical competency",
+      "Your conceptual competency",
+      "Your interpersonal competency",
+    ];
+    const SCALE = [1, 2, 3, 4];
+
+    const $ = sel => document.querySelector(sel);
+    const form = $("#form");
+    const errorBox = $("#error");
+    const totalEl = $("#total");
+    const avgEl = $("#avg");
+
+    function buildForm() {
+      QUESTIONS.forEach((q, idx) => {
+        const fs = document.createElement("fieldset");
+        fs.setAttribute("aria-describedby", `q${idx + 1}-desc`);
+        const questionRow = document.createElement("div");
+        questionRow.className = "question-row";
+
+        const legend = document.createElement("legend");
+        legend.className = "question-text";
+        const num = document.createElement("span");
+        num.className = "q-num";
+        num.textContent = `${idx + 1})`;
+        const copy = document.createElement("span");
+        copy.className = "q-copy";
+        copy.textContent = q;
+        legend.appendChild(num);
+        legend.appendChild(copy);
+
+        const scaleOptions = document.createElement("div");
+        scaleOptions.className = "scale-options";
+        SCALE.forEach(val => {
+          const wrap = document.createElement("div");
+          const id = `q${idx + 1}_${val}`;
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `q${idx + 1}`;
+          input.id = id;
+          input.value = String(val);
+          input.required = true;
+          const label = document.createElement("label");
+          label.setAttribute("for", id);
+          label.textContent = val;
+          wrap.appendChild(input);
+          wrap.appendChild(label);
+          scaleOptions.appendChild(wrap);
+        });
+
+        questionRow.appendChild(legend);
+        questionRow.appendChild(scaleOptions);
+        fs.appendChild(questionRow);
+        form.appendChild(fs);
+      });
+    }
+    buildForm();
+
+    function getValues() {
+      return QUESTIONS.map((_, i) => {
+        const sel = form.querySelector(`input[name="q${i + 1}"]:checked`);
+        return sel ? Number(sel.value) : null;
+      });
+    }
+    const allAnswered = vals => vals.every(v => v !== null);
+
+    $("#calc").addEventListener("click", () => {
+      const vals = getValues();
+      if (!allAnswered(vals)) {
+        errorBox.style.display = "block";
+        totalEl.textContent = "Total: — / 16";
+        avgEl.textContent = "Average: —";
+        return;
+      }
+      errorBox.style.display = "none";
+      const total = vals.reduce((a, b) => a + b, 0);
+      const avg = (total / vals.length).toFixed(2);
+      totalEl.textContent = `Total: ${total} / 16`;
+      avgEl.textContent = `Average: ${avg}`;
+      try { localStorage.setItem("eq_ratings", JSON.stringify(vals)); } catch { }
+    });
+
+    $("#reset").addEventListener("click", () => {
+      form.reset();
+      errorBox.style.display = "none";
+      totalEl.textContent = "Total: — / 16";
+      avgEl.textContent = "Average: —";
+      try { localStorage.removeItem("eq_ratings"); } catch { }
+    });
+
+    $("#download").addEventListener("click", () => {
+      const vals = getValues();
+      if (!allAnswered(vals)) { errorBox.style.display = "block"; return; }
+      const total = vals.reduce((a, b) => a + b, 0);
+      const avg = (total / vals.length).toFixed(2);
+      const rows = [["Question", "Response (1–5)"], ...QUESTIONS.map((q, i) => [`${i + 1}. ${q}`, vals[i]]), ["Total", total], ["Average", avg]];
+      const csv = rows.map(r => r.map(x => `"${String(x).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "eq-self-rating.csv"; document.body.appendChild(a);
+      a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    $("#print").addEventListener("click", () => window.print());
+
+    (function restore() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("eq_ratings") || "null");
+        if (Array.isArray(saved) && saved.length === QUESTIONS.length) {
+          saved.forEach((v, i) => {
+            const input = form.querySelector(`input[name="q${i + 1}"][value="${v}"]`);
+            if (input) input.checked = true;
+          });
+        }
+      } catch { }
+    })();
+  </script>
+</body>
+
+</html>
