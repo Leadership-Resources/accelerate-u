@@ -20,3 +20,6 @@
 </iframe>
 
 ```
+
+* You can use https://iframetester.com/ to visualize the URL in the iFrame
+* It will also provide suggestions on height, rather than using a fixed 800 pixel value
