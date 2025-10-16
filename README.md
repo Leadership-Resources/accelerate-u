@@ -8,6 +8,7 @@
     * https://leadership-resources.github.io/accelerate-u/eq-understanding-others.html
     * https://leadership-resources.github.io/accelerate-u/leadership-self-reflection.html
     * https://leadership-resources.github.io/accelerate-u/leadership-self-competency.html
+    * https://leadership-resources.github.io/accelerate-u/eq-effective-listening.html
 
 * The html url can then be embedded in an iFrame like this:
 
