@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Engagement Q12</title>
+  <title>engagement-q12</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -35,7 +35,7 @@
 
     .wrap { max-width: 900px; margin: auto; padding: 0 16px; width: 100%; }
 
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 6px 20px rgba(0,0,0,.06); padding: 28px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 6px 20px rgba(0,0,0,.06); padding: 28px; position: relative; }
 
     .legend { display:flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; justify-content: center; }
     .pill { border: 1px solid var(--border); background: var(--brand-green-light); color: var(--brand-navy); border-radius: 999px; padding: 6px 12px; font-size: .75rem; font-weight: 600; font-family:'Montserrat'; }
@@ -85,6 +85,8 @@
 
     .error { display:none; margin-top: 6px; color: var(--bad); background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 10px 12px; font-family:'Georgia'; }
 
+    .citation { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1.5rem; font-family: 'Georgia', serif; }
+
     @media (max-width: 640px) {
       .scale-options label { width: 1.7rem; height: 1.7rem; }
     }
@@ -126,6 +128,7 @@
             <li><strong>41–60</strong> | <strong>Highly Engaged</strong> — Your responses reflect strong engagement and fulfillment in your work. You likely feel valued, connected to your organization’s purpose, and confident in your opportunities to learn and grow. Continue nurturing this by sharing ideas, helping others succeed, and staying proactive about your own development. Your engagement not only benefits you, it inspires those around you.</li>
           </ul>
         </div>
+        <div class="citation">Gallup, Inc. (2025). Q12® employee engagement survey. Gallup, Inc.</div>
       </div>
     </div>
   </div>
