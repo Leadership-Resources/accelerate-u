@@ -11,7 +11,8 @@
     * https://leadership-resources.github.io/accelerate-u/eq-effective-listening.html
     * https://leadership-resources.github.io/accelerate-u/fostering-psych-safety.html
     * https://leadership-resources.github.io/accelerate-u/engagement-q12.html
-
+    * https://leadership-resources.github.io/accelerate-u/culture_communication.html
+    
 * The html url can then be embedded in an iFrame like this:
 
 ```
