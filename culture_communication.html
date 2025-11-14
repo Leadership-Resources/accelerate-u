@@ -287,7 +287,7 @@
 
       <div class="results" aria-live="polite" aria-atomic="true">
         <div class="kpi">
-          <span id="total" class="badge">Total: — / 60</span>
+          <span id="total" class="badge">Total: — / 28</span>
           <span id="avg" class="badge">Average: —</span>
         </div>
         <div class="muted" style="font-size: .9rem;">
@@ -393,14 +393,14 @@
       const vals = getValues();
       if (!allAnswered(vals)) {
         errorBox.style.display = "block";
-        totalEl.textContent = "Total: — / 60";
+        totalEl.textContent = "Total: — / 28";
         avgEl.textContent = "Average: —";
         return;
       }
       errorBox.style.display = "none";
       const total = vals.reduce((a, b) => a + b, 0);
       const avg = (total / vals.length).toFixed(2);
-      totalEl.textContent = `Total: ${total} / 60`;
+      totalEl.textContent = `Total: ${total} / 28`;
       avgEl.textContent = `Average: ${avg}`;
       try { localStorage.setItem("culture_communication_ratings", JSON.stringify(vals)); } catch { }
     });
@@ -408,7 +408,7 @@
     $("#reset").addEventListener("click", () => {
       form.reset();
       errorBox.style.display = "none";
-      totalEl.textContent = "Total: — / 60";
+      totalEl.textContent = "Total: — / 28";
       avgEl.textContent = "Average: —";
       try { localStorage.removeItem("culture_communication_ratings"); } catch { }
     });
