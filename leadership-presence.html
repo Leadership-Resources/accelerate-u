@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Culture Communication</title>
+  <title>Leadership Presence</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -268,15 +268,16 @@
   <div class="wrap">
     <div class="card" role="form" aria-labelledby="title">
       <div class="legend" aria-hidden="true">
-        <span class="pill">1 = We don't do this</span>
-        <span class="pill">2 = We do this inconsistently</span>
-        <span class="pill">3 = We do this fairly well</span>
-        <span class="pill">4 = This is a strength area for us</span>
+        <span class="pill">1 = Rarely</span>
+        <span class="pill">2 = Occasionally</span>
+        <span class="pill">3 = Sometimes</span>
+        <span class="pill">4 = Often</span>
+        <span class="pill">5 = Consistently</span>
       </div>
 
       <form id="form" novalidate></form>
 
-      <div id="error" class="error" role="alert">Please select a rating (1–4) for every statement.</div>
+      <div id="error" class="error" role="alert">Please select a rating (1–5) for every statement.</div>
 
       <div class="actions">
         <button type="button" id="calc" class="btn">Calculate</button>
@@ -287,31 +288,20 @@
 
       <div class="results" aria-live="polite" aria-atomic="true">
         <div class="kpi">
-          <span id="total" class="badge">Total: — / 28</span>
+          <span id="total" class="badge">Total: — / 55</span>
           <span id="avg" class="badge">Average: —</span>
         </div>
         <div class="muted" style="font-size: .9rem;">
           <div><strong>Guide:</strong></div>
           <ul class="list-disc pl-6 space-y-1">
-            <li><strong>7-14</strong> | <strong>Developing Culture</strong> —
-              Your company’s culture may still be taking shape. You might notice gaps in communication, recognition, or
-              alignment with core values. Employees may not always feel connected, supported, or heard. Start by
-              identifying one or two key areas, such as improving transparency or celebrating contributions, and make
-              small, consistent actions to begin strengthening
-              connection and trust across the organization.</li>
-            <li><strong>15-21</strong> | <strong>Strengthening Culture</strong> —
-              Showing encouraging signs of a healthy culture, though some areas likely need more consistency or
-              follow-through. Communication may be improving, and employees might feel somewhat supported and aligned,
-              but opportunities remain to deepen trust, recognition, and shared purpose. Focus on reinforcing what’s
-              already working and look for ways to make positive practices part of the daily rhythm.
-            </li>
-            <li><strong>22-28</strong> | <strong>Thriving Culture</strong> —
-              Your responses reflect a strong, intentional culture where people feel valued, connected, and aligned with
-              the company’s mission. Communication is open and transparent, achievements are celebrated, and employees
-              have opportunities to learn, grow, and thrive. Continue nurturing this strength by maintaining
-              transparency, recognizing excellence often, and inviting employees to take part in shaping the culture. A
-              thriving culture doesn’t just happen — it’s something you create and sustain together.
-            </li>
+            <li><strong>45–55</strong> | <strong>Established Leadership Presence</strong> —
+              You consistently demonstrate behaviors that build credibility and influence. Focus on refining and adapting your presence across different situations.</li>
+            <li><strong>34–44</strong> | <strong>Solid Foundation</strong> —
+              You show many strengths in this area, with a few opportunities to improve consistency and impact. Focus on identifying 1–2 areas that would strengthen your influence even further.</li>
+            <li><strong>23–33</strong> | <strong>Developing</strong> —
+              You’re demonstrating some key behaviors, but there are noticeable gaps that may be limiting your influence. Increasing your intentionality in how you communicate, respond, and engage with others can significantly strengthen your presence.</li>
+            <li><strong>11–22</strong> | <strong>Opportunity for Growth</strong> —
+              Your leadership presence may not yet be translating into influence. This course will help you build key skills to strengthen it.</li>
           </ul>
         </div>
       </div>
@@ -320,15 +310,19 @@
 
   <script>
     const QUESTIONS = [
-      "Foster open communication",
-      "Foster transparent communication",
-      "Recognize and reward contributions and achievements",
-      "Provide professional development and growth opportunities",
-      "Promote employee wellness opportunities and work-life balance",
-      "Define, communicate, and stay true to the company’s core values and purpose",
-      "Foster a sense of community and collaboration",
+      "Do you listen fully before responding?",
+      "How comfortable are you receiving questions or pushback without becoming defensive?",
+      "Do you acknowledge and build on others’ perspectives?",
+      "Do you speak with confidence, even when you don’t have formal authority?",
+      "Are you intentional about your tone, body language, and pace when communicating?",
+      "Do you follow through on what you say you will do?",
+      "Do you adapt your message to your audience and situation?",
+      "Do you remain composed and thoughtful, especially in high-pressure or tense situations?",
+      "When you share ideas, do they tend to gain traction with the group?",
+      "Do you project confidence without dominating the room?",
+      "Do you invite and incorporate others’ perspectives in a way that moves the conversation forward?"
     ];
-    const SCALE = [1, 2, 3, 4];
+    const SCALE = [1, 2, 3, 4, 5];
 
     const $ = sel => document.querySelector(sel);
     const form = $("#form");
@@ -393,24 +387,24 @@
       const vals = getValues();
       if (!allAnswered(vals)) {
         errorBox.style.display = "block";
-        totalEl.textContent = "Total: — / 28";
+        totalEl.textContent = "Total: — / 55";
         avgEl.textContent = "Average: —";
         return;
       }
       errorBox.style.display = "none";
       const total = vals.reduce((a, b) => a + b, 0);
       const avg = (total / vals.length).toFixed(2);
-      totalEl.textContent = `Total: ${total} / 28`;
+      totalEl.textContent = `Total: ${total} / 55`;
       avgEl.textContent = `Average: ${avg}`;
-      try { localStorage.setItem("culture_communication_ratings", JSON.stringify(vals)); } catch { }
+      try { localStorage.setItem("leadership_presence_ratings", JSON.stringify(vals)); } catch { }
     });
 
     $("#reset").addEventListener("click", () => {
       form.reset();
       errorBox.style.display = "none";
-      totalEl.textContent = "Total: — / 28";
+      totalEl.textContent = "Total: — / 55";
       avgEl.textContent = "Average: —";
-      try { localStorage.removeItem("culture_communication_ratings"); } catch { }
+      try { localStorage.removeItem("leadership_presence_ratings"); } catch { }
     });
 
     $("#download").addEventListener("click", () => {
@@ -423,7 +417,7 @@
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url; a.download = "engagement-q12.csv"; document.body.appendChild(a);
+      a.href = url; a.download = "leadership-presence-assessment.csv"; document.body.appendChild(a);
       a.click(); a.remove(); URL.revokeObjectURL(url);
     });
 
@@ -431,7 +425,7 @@
 
     (function restore() {
       try {
-        const saved = JSON.parse(localStorage.getItem("culture_communication_ratings") || "null");
+        const saved = JSON.parse(localStorage.getItem("leadership_presence_ratings") || "null");
         if (Array.isArray(saved) && saved.length === QUESTIONS.length) {
           saved.forEach((v, i) => {
             const input = form.querySelector(`input[name=\"q${i + 1}\"][value=\"${v}\"]`);
