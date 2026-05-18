@@ -12,6 +12,7 @@
     * https://leadership-resources.github.io/accelerate-u/fostering-psych-safety.html
     * https://leadership-resources.github.io/accelerate-u/engagement-q12.html
     * https://leadership-resources.github.io/accelerate-u/culture_communication.html
+    * https://leadership-resources.github.io/accelerate-u/leadership-presence.html
     
 * The html url can then be embedded in an iFrame like this:
 
